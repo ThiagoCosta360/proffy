@@ -1,20 +1,16 @@
-import express, { response } from "express"
-import ClassesController from "./controllers/ClassesController"
-import ConnectionsController from "./controllers/ConnectionsController"
+import express from 'express';
 
-const classesController = new ClassesController()
-const connectionsController = new ConnectionsController()
+import ClassesController from './controllers/ClassesController';
+import ConnectionsController from './controllers/ConnectionsController';
 
-const routes = express()
+const routes = express.Router();
+const classesControllers = new ClassesController();
+const connectionsControllers = new ConnectionsController();
 
-routes.get("/", (req, res) => {
-    return res.json({ Message: "Hello World" })
-})
+routes.get('/classes', classesControllers.index);
+routes.post('/classes', classesControllers.create);
 
-routes.get("/classes", classesController.index)
-routes.post("/classes", classesController.create)
+routes.get('/connections', connectionsControllers.index);
+routes.post('/connections', connectionsControllers.create);
 
-routes.get("/connections", connectionsController.index)
-routes.post("/connections", connectionsController.create)
-
-export default routes
+export default routes;

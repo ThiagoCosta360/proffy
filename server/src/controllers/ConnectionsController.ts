@@ -1,21 +1,24 @@
-import { Request, Response } from "express"
-import db from "../database/connection"
+/* eslint-disable camelcase */
+/* eslint-disable class-methods-use-this */
+import { Request, Response } from 'express';
+import db from '../db/connection';
 
 export default class ConnectionsController {
-    async index(req: Request, res: Response) {
-        const totalConnections = await db("connections").count("* as total")
-        const { total } = totalConnections[0]
+  async index(req: Request, res: Response) {
+    const totalConnections = await db('connections').count('* as total');
 
-        return res.json({ total })
-    }
+    const { total } = totalConnections[0];
 
-    async create(req: Request, res: Response) {
-        const { user_id } = req.body
+    return res.json({ total });
+  }
 
-        await db("connections").insert({
-            user_id,
-        })
+  async create(req: Request, res: Response) {
+    const { user_id } = req.body;
 
-        return res.status(201).send()
-    }
+    await db('connections').insert({
+      user_id,
+    });
+
+    return res.status(201).send();
+  }
 }

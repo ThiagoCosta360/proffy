@@ -1,11 +1,11 @@
-import express, { request, Router } from "express"
-import cors from "cors"
-import routes from "./routes"
+import express from 'express';
 
-const app = express()
+import routes from './routes';
 
-app.use(cors())
-app.use(express.json())
-app.use(routes)
+const app = express();
 
-app.listen(3333)
+app.use(express.json());
+
+app.use(routes);
+
+app.listen(3333);
